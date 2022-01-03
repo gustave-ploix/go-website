@@ -1,63 +1,64 @@
 import { useEffect, useRef } from "react";
 
-import roundClass from '../../services/roundClass';
+import roundClass from "../../services/roundClass";
 
-import './canvas.scss';
+import "./canvas.scss";
 
 export default function Canvas() {
-    
-    const canvas = useRef();
-    const steps = 15;
+  const canvas = useRef();
+  const steps = 15;
 
+  const secondStep = (iterable, context) => {
+    let secondIteration = iterable;
 
-    useEffect(() => {
-        const context = canvas.current.getContext('2d');
+    if (secondIteration === steps) {
+      return true;
+    } else {
+      setTimeout(() => {
+        const roundBlack = new roundClass(
+          canvas.current.width * 0.5,
+          canvas.current.height * 0.5,
+          secondIteration * 20
+        );
+        roundBlack.draw(context);
+        roundBlack.strokeBlack(context, secondIteration);
 
-        let index = 0;
-        
-        const firstStep = setInterval(() => {
-            
-            const roundWhite = new roundClass(canvas.current.width * 0.5, canvas.current.height * 0.5, index * 20);
-            roundWhite.draw(context);
-            roundWhite.strokeWhite(context, index);
-            
-            console.log(index + "first");
-            index += 1;
+        secondStep(iterable + 1, context);
+        console.log("blabla");
+      }, 60);
+    }
+  };
 
-            if (index == steps) {
-                clearInterval(firstStep);
+  const firstStep = (iterable, context) => {
+    let firstIteration = iterable;
 
-                let indexTwo = 0
+    if (firstIteration === steps) {
 
-                const secondStep = setInterval(() => {
+        setTimeout(() => {
+            secondStep(0, context);
+        }, 200);
+      return true;
+    } else {
+      setTimeout(() => {
+        const roundWhite = new roundClass(
+          canvas.current.width * 0.5,
+          canvas.current.height * 0.5,
+          firstIteration * 20
+        );
+        roundWhite.draw(context);
+        roundWhite.strokeWhite(context, firstIteration);
 
-                    const roundBlack = new roundClass(canvas.current.width * 0.5, canvas.current.height * 0.5, indexTwo * 20);
-                    roundBlack.draw(context);
-                    roundBlack.strokeBlack(context, indexTwo);
+        firstStep(iterable + 1, context);
+      }, 60);
+    }
+  };
 
-                    indexTwo += 1;
-                    console.log(indexTwo + "second");
+  useEffect(() => {
+    const context = canvas.current.getContext("2d");
+    firstStep(0, context);
+  }, []);
 
-                    if(indexTwo == steps) {
-                        clearInterval(secondStep);
-                    }
-                    //second loop
-                }, 60)
-
-            }
-            //first loop
-        }, 60)
-            
-
-    }, [])
-    
-    return (
-        <canvas id="canvas" 
-        ref={canvas}
-        width={600}
-        height={600}
-        >
-
-        </canvas>
-    )
-}   
+  return (
+    <canvas id="canvas" ref={canvas} width={600} height={600}></canvas>
+  );
+}
