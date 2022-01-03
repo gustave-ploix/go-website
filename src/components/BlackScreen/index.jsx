@@ -6,9 +6,9 @@ export default function BlackScreen() {
 
     return (
 
-        <section id='page'>
+        <>
             <Canvas />
-        </section>
+        </>
 
     )
 
