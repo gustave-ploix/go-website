@@ -1,46 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 
-
 import roundClass from "../../services/roundClass";
 
 import "./canvas.scss";
 
-export default function Canvas() {
-  const [isClicked, setIsClicked] = useState(false);
-  const [animationIsDone, setAnimationIsDone] = useState(false);
+export default function Canvas({
+  isClicked,
+  setIsClicked,
+  animationIsDone,
+  setAnimationIsDone,
+}) {
+
 
   const canvas = useRef();
   const steps = 15;
-
-  const secondStep = (iterable, context) => {
-    let secondIteration = iterable;
-
-    if (secondIteration === steps) {
-      setAnimationIsDone(!animationIsDone);
-      return true;
-    } else {
-      setTimeout(() => {
-        const roundBlack = new roundClass(
-          canvas.current.width * 0.5,
-          canvas.current.height * 0.5,
-          secondIteration * 20
-        );
-        roundBlack.draw(context);
-        roundBlack.strokeBlack(context, secondIteration);
-
-        secondStep(iterable + 1, context);
-        console.log("blabla");
-      }, 60);
-    }
-  };
 
   const firstStep = (iterable, context) => {
     let firstIteration = iterable;
 
     if (firstIteration === steps) {
-      // setTimeout(() => {
       secondStep(0, context);
-      // }, 100);
       return true;
     } else {
       setTimeout(() => {
@@ -57,6 +36,28 @@ export default function Canvas() {
     }
   };
 
+  const secondStep = (iterable, context) => {
+    let secondIteration = iterable;
+
+    if (secondIteration === steps) {
+      setAnimationIsDone(!animationIsDone);
+      return true;
+    } else {
+      setTimeout(() => {
+        const roundBlack = new roundClass(
+          canvas.current.width * 0.5,
+          canvas.current.height * 0.5,
+          secondIteration * 20
+        );
+
+        roundBlack.draw(context);
+        roundBlack.strokeBlack(context, secondIteration);
+
+        secondStep(iterable + 1, context);
+      }, 60);
+    }
+  };
+
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
@@ -69,19 +70,13 @@ export default function Canvas() {
   return (
     <section id="page">
       <canvas
-      onClick={handleClick}
+        onClick={handleClick}
         id={isClicked ? "transition" : ""}
         className={animationIsDone ? "canvas shadowed" : "canvas"}
         ref={canvas}
         width={600}
         height={600}
       ></canvas>
-      ;
-      <h1 id={isClicked ? "transitionTitle" : ""}
-    
-      className={animationIsDone ? "title visible" : "title"}>
-        GO
-      </h1>
     </section>
   );
 }
