@@ -1,10 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import roundClass from "../../services/roundClass";
 
 import "./canvas.scss";
 
 export default function Canvas() {
+  const [animationIsDone, setAnimationIsDone] = useState(false);
+
   const canvas = useRef();
   const steps = 15;
 
@@ -12,6 +14,7 @@ export default function Canvas() {
     let secondIteration = iterable;
 
     if (secondIteration === steps) {
+      setAnimationIsDone(!animationIsDone);
       return true;
     } else {
       setTimeout(() => {
@@ -33,10 +36,9 @@ export default function Canvas() {
     let firstIteration = iterable;
 
     if (firstIteration === steps) {
-
-        setTimeout(() => {
-            secondStep(0, context);
-        }, 200);
+      // setTimeout(() => {
+      secondStep(0, context);
+      // }, 100);
       return true;
     } else {
       setTimeout(() => {
@@ -53,12 +55,31 @@ export default function Canvas() {
     }
   };
 
+  const handleMove = (e) => {
+    console.log(canvas.current.style)
+
+
+      canvas.current.style.transform = `rotate(${e.screenX / 10}deg)`
+  }
+
   useEffect(() => {
     const context = canvas.current.getContext("2d");
     firstStep(0, context);
   }, []);
 
   return (
-    <canvas id="canvas" ref={canvas} width={600} height={600}></canvas>
+    <section id='page' onMouseMove={handleMove}>
+      <canvas
+        id="canvas"
+        className={animationIsDone ? "shadowed" : ""}
+        ref={canvas}
+        width={600}
+        height={600}
+      ></canvas>
+      ;
+      <h1 id="title" className={animationIsDone ? "visible" : ""}>
+        GO
+      </h1>
+    </section>
   );
 }

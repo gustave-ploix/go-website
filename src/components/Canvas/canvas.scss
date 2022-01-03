@@ -1,3 +1,33 @@
 #canvas {
     background-color: black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.shadowed {
+    transition: box-shadow 0.5s 500ms ease-in-out,
+    filter 0.3s ease-in-out;
+    box-shadow: white 20px 20px 20px;
+
+    &:hover {
+        filter: blur(10px);
+    }
+}
+
+#title {
+    color: white;
+    font-size: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "General Sans", sans-serif;
+    font-weight: 100;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s 550ms ease-in-out;
+    
+    &.visible {
+        opacity: 1;
+    }
 }
