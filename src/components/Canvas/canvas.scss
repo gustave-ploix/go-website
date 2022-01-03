@@ -1,20 +1,20 @@
-#canvas {
+.canvas {
     background-color: black;
     border-radius: 50%;
     cursor: pointer;
 }
 
 .shadowed {
-    transition: box-shadow 0.5s 500ms ease-in-out,
+    transition: box-shadow 0.7s 450ms ease-in-out,
     filter 0.3s ease-in-out;
-    box-shadow: white 20px 20px 20px;
+    box-shadow: white 10px 10px 18px;
 
     &:hover {
         filter: blur(10px);
     }
 }
 
-#title {
+.title {
     color: white;
     font-size: 150px;
     position: absolute;
@@ -25,9 +25,25 @@
     font-weight: 100;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.6s 550ms ease-in-out;
+    transition: opacity 0.7s 650ms ease-in-out,
+    top 1s ease-in-out 1000ms;
     
     &.visible {
         opacity: 1;
     }
+}
+
+#transition {
+    animation: turning 1s ease-in-out;
+    box-shadow: none;
+}
+
+#transitionTitle {
+    top: 40%;
+}
+
+
+@keyframes turning {
+    from {transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
 }

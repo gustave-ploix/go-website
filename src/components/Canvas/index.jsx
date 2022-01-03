@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
+
 import roundClass from "../../services/roundClass";
 
 import "./canvas.scss";
 
 export default function Canvas() {
+  const [isClicked, setIsClicked] = useState(false);
   const [animationIsDone, setAnimationIsDone] = useState(false);
 
   const canvas = useRef();
@@ -55,12 +57,9 @@ export default function Canvas() {
     }
   };
 
-  const handleMove = (e) => {
-    console.log(canvas.current.style)
-
-
-      canvas.current.style.transform = `rotate(${e.screenX / 10}deg)`
-  }
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
 
   useEffect(() => {
     const context = canvas.current.getContext("2d");
@@ -68,16 +67,19 @@ export default function Canvas() {
   }, []);
 
   return (
-    <section id='page' onMouseMove={handleMove}>
+    <section id="page">
       <canvas
-        id="canvas"
-        className={animationIsDone ? "shadowed" : ""}
+      onClick={handleClick}
+        id={isClicked ? "transition" : ""}
+        className={animationIsDone ? "canvas shadowed" : "canvas"}
         ref={canvas}
         width={600}
         height={600}
       ></canvas>
       ;
-      <h1 id="title" className={animationIsDone ? "visible" : ""}>
+      <h1 id={isClicked ? "transitionTitle" : ""}
+    
+      className={animationIsDone ? "title visible" : "title"}>
         GO
       </h1>
     </section>
