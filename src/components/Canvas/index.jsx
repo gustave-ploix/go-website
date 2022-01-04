@@ -1,8 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import roundClass from "../../services/roundClass";
 
 import "./canvas.scss";
+
+const getWindowDimentions = () => {
+  const {innerWidth: width, innerHeight: height} = window;
+  return {
+    width, height
+  };
+};
 
 export default function Canvas({
   isClicked,
@@ -63,6 +70,9 @@ export default function Canvas({
   };
 
   useEffect(() => {
+    
+    // console.log(getWindowDimentions().);
+
     const context = canvas.current.getContext("2d");
     firstStep(0, context);
   }, []);
