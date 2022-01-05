@@ -1,0 +1,42 @@
+.titleBox {
+  width: 40%;
+  height: 120px;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  opacity: 0;
+  transition: opacity 0.0s 2000ms ease-in-out;
+
+
+    &.visible {
+        opacity: 1;
+    }
+
+  .titleInHeader {
+    font-size: 100px;
+    font-family: "General Sans", sans-serif;
+    font-weight: 100;
+    color: white;
+  }
+
+  .line {
+    width: 200px;
+    height: 1px;
+    background-color: white;
+    transform: scale(0);
+    transition: transform 0.5s ease-in-out 2000ms;
+    border-radius: 50%;
+
+
+    &.deployed {
+        transform: scale(1);
+    }
+  }
+}
