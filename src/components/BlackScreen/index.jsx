@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Title from '../Title';
 import Canvas from '../Canvas';
 
 import './BlackScreen.scss';
@@ -18,9 +19,10 @@ export default function BlackScreen() {
             setIsClicked={setIsClicked} 
             animationIsDone={animationIsDone}
             setAnimationIsDone={setAnimationIsDone}/>
-        <h1
-        id={isClicked ? "transitionTitle" : ""}
-        className={animationIsDone ? "title visible" : "title"}>GO</h1>
+             <Title isClicked={isClicked} 
+            setIsClicked={setIsClicked} 
+            animationIsDone={animationIsDone}
+            setAnimationIsDone={setAnimationIsDone}/>
         </>
 
     )
