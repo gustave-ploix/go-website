@@ -1,11 +1,11 @@
 import React from 'react';
 
-import BlackScreen from './components/BlackScreen';
+import Container from './Container';
 
 import './style.scss';
 
 export default function App() {
     return (
-        <BlackScreen />
+        <Container />
         )
 }
