@@ -7,17 +7,17 @@ import MouseTracker from "../services/MouseTracker";
 import "./container.scss";
 
 export default function BlackScreen() {
+
   const [isClicked, setIsClicked] = useState(false);
   const [animationIsDone, setAnimationIsDone] = useState(false);
   const [transitionIsDone, setTransitionIsDone] = useState(false);
 
-  const [posX, setPosX] = useState(0);
-  const [posY, setPosY] = useState(0);
-
+  const [mouseX, setMouseX] = useState(0);
+  const [mouseY, setMouseY] = useState(0);
 
   const handleMove = (e) => {
-    setPosX(e.screenX);
-    setPosY(e.screenY);
+    setMouseX(e.screenX);
+    setMouseY(e.screenY);
   }
 
   return (
@@ -26,10 +26,10 @@ export default function BlackScreen() {
     >
       {transitionIsDone ? (
         <>
-          <MouseTracker
-            posX={posX}
-            posY={posY}
-          />
+          {/* <MouseTracker
+            mouseX={mouseX}
+            mouseY={mouseY}
+          /> */}
           <FullPage isClicked={isClicked} transitionIsDone={transitionIsDone} />
         </>
       ) : (
