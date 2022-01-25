@@ -1,0 +1,19 @@
+.mouseTracker {
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+
+    border: 1px solid white;
+
+
+    background-color: white;
+
+    mix-blend-mode: difference;
+
+    position: absolute;
+
+    transition: transform 0.08s ease-in-out;
+
+    z-index: 0;
+}
