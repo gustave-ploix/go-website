@@ -12,24 +12,11 @@ export default function BlackScreen() {
   const [animationIsDone, setAnimationIsDone] = useState(false);
   const [transitionIsDone, setTransitionIsDone] = useState(false);
 
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-
-  const handleMove = (e) => {
-    setMouseX(e.screenX);
-    setMouseY(e.screenY);
-  }
 
   return (
-    <div className="black"
-      onMouseMove={handleMove}
-    >
+    <div className="black">
       {transitionIsDone ? (
         <>
-          {/* <MouseTracker
-            mouseX={mouseX}
-            mouseY={mouseY}
-          /> */}
           <FullPage isClicked={isClicked} transitionIsDone={transitionIsDone} />
         </>
       ) : (
