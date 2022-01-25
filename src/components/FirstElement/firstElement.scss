@@ -1,0 +1,34 @@
+.waveContainer {
+  position: absolute;
+  bottom: 0px;
+
+  transition: bottom 0.3s ease-in-out;
+
+  .waves {
+    position: absolute;
+    bottom: -100px;
+
+    &:nth-child(2) {
+      bottom: -125px;
+    }
+    &:nth-child(3) {
+      bottom: -150px;
+    }
+    &:nth-child(4) {
+      bottom: 0px;
+    }
+    &.open {
+      &:nth-child(4) {
+        animation: openTheWaves 0.5s ease-in-out forwards;
+      }
+    }
+  }
+}
+
+@keyframes openTheWaves {
+    from {
+        bottom: 0px;
+    } to {
+        bottom: -175px;
+    }
+}
