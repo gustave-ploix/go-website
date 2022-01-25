@@ -1,4 +1,9 @@
 .titleBox {
+
+  z-index: 10;
+
+  mix-blend-mode: difference;
+
   width: 40%;
   height: 120px;
 
@@ -35,6 +40,17 @@
     &.deployed {
       animation: appearingLines 0.5s forwards ease-in-out;
     }
+  }
+
+
+  @media(max-width: 1440px) {
+    width: 50%;
+  }
+  @media(max-width: 1200px) {
+    width: 60%;
+  }
+  @media(max-width: 1000px) {
+    width: 70%;
   }
 }
 
